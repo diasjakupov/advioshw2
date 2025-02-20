@@ -26,7 +26,7 @@ class ImageLoader {
             let image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
                 if let image = image, let self = self {
                     self.delegate?.imageLoader(self, didLoad: image)
                     self.completionHandler?(image)

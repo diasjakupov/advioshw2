@@ -25,7 +25,7 @@ class ProfileManager {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) { [weak self] in
             let profile = UserProfile(id: UUID(), username: "User\(id)", bio: "This is user \(id)'s bio", followers: 100)
             self?.activeProfiles[id] = profile
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
                 completion(.success(profile))
                 self?.delegate?.profileDidUpdate(profile)
                 self?.onProfileUpdate?(profile)
